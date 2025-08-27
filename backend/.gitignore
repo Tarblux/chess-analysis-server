@@ -1,0 +1,32 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+.Python
+build/
+dist/
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# UV
+uv.lock
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# Environments
+.env
+.venv
+env/
+
+# PyCharm
+.idea/
+
+# Visual Studio Code
+.vscode/
+
