@@ -1,4 +1,4 @@
-A Chess Analysis Server that processes games asynchronously while serving preprocessed results to a frontend. The stack is Python + Flask for the API, RabbitMQ with Celery for the message queue, PostgreSQL with SQLAlchemy for storage, and a future ML engine for advanced analysis.
+A Chess Analysis Server that processes games asynchronously while serving preprocessed results to a frontend. The stack is Python + Flask for the API, RabbitMQ with Celery for the message queue, PostgreSQL with SQLAlchemy for storage, and a future ML engine for advanced analysis.Dependecies managed with Poetry.
 
 The architecture has two main pipelines:
 
