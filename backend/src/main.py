@@ -2,7 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 
 from src.config import config
-from src.core.database import init_db
+from src.core.database import init_db,close_db
 
 
 def create_app() -> Flask:
@@ -24,7 +24,6 @@ def create_app() -> Flask:
     @app.teardown_appcontext
     def close_db(error):
         """Close database session on app teardown."""
-        from src.core.database import close_db
         close_db()
     
     return app
@@ -32,5 +31,5 @@ def create_app() -> Flask:
 
 if __name__ == "__main__":
     app = create_app()
-    app.run(host="0.0.0.0", port=5000, debug=config.DEBUG)
+    app.run(host="0.0.0.0", port=3000, debug=config.DEBUG)
 

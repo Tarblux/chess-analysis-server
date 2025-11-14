@@ -16,7 +16,7 @@ SessionLocal = None
 
 def init_db(app: Flask) -> None:
     """
-    Initialize database connection for Flask app.
+    Initialize database connection
     
     Args:
         app: Flask application instance
