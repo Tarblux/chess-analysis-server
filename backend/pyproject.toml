@@ -1,6 +1,6 @@
 [project]
 name = "elombe"
-version = "0.1.0"
+version = "0.1.1"
 description = "But When In Cameroon My Babies Call Me Big Olembe"
 authors = [
     {name = "Tariq Williams"}
@@ -15,4 +15,6 @@ dependencies = [
     "psycopg2-binary (>=2.9.10,<3.0.0)",
     "celery (>=5.5.3,<6.0.0)",
     "flask-cors (>=6.0.1,<7.0.0)",
+    "neo4j (>=5.20.0,<6.0.0)",
+    "kombu (>=5.4.0,<6.0.0)",
 ]

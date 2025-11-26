@@ -1,4 +1,5 @@
 """Database connection and session management."""
+
 from flask import Flask
 from sqlalchemy import create_engine , text
 from sqlalchemy.orm import sessionmaker, scoped_session
@@ -63,6 +64,24 @@ def get_db():
         yield db
     finally:
         SessionLocal.remove()
+
+
+def check_db_health() -> tuple[bool, str]:
+    """
+    Check PostgreSQL connection health.
+    
+    Returns:
+        Tuple of (is_healthy, message)
+    """
+    if engine is None:
+        return False, "Database engine not initialized"
+    
+    try:
+        with engine.connect() as conn:
+            conn.execute(text("SELECT 1"))
+        return True, "Connection successful"
+    except Exception as e:
+        return False, f"Connection failed: {str(e)}"
 
 
 def close_db():
