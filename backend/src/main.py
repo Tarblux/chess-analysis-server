@@ -23,13 +23,9 @@ def create_app() -> Flask:
     # Enable CORS
     CORS(app)
     
-    # Initialize database connections (safe_init decorator handles errors gracefully)
+    # Initialize infra connections (PostgreSQL,Neo4j,Celery)
     init_db(app)
-    
-    # Initialize Neo4j (safe_init decorator handles errors gracefully)
     init_neo4j(app)
-    
-    # Initialize Celery (safe_init decorator handles errors gracefully)
     init_celery()
     
     # Register health check routes
