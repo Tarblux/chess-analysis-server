@@ -6,7 +6,7 @@ import time
 from src.config import config
 from src.core.database import check_db_health
 from src.core.neo4j import check_neo4j_health
-from src.core.celery_app import check_rabbitmq_health
+from src.core.celery import check_rabbitmq_health
 
 # Create blueprint for health check routes
 health_bp = Blueprint("health", __name__)

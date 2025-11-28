@@ -5,7 +5,7 @@ import time
 from src.config import config
 from src.core.database import init_db, close_db
 from src.core.neo4j import init_neo4j, close_neo4j
-from src.core.celery_app import init_celery
+from src.core.celery import init_celery
 from src.api.routes import health_bp
 
 # Track app start time for uptime calculation
@@ -24,7 +24,10 @@ def create_app() -> Flask:
     CORS(app)
     
     # Initialize database connections
-    init_db(app)
+    try:
+        init_db(app)
+    except Exception as e:
+        app.logger.warning(f"Database initialization failed: {e}. App will continue without database.")
     
     # Initialize Neo4j
     try:
@@ -54,7 +57,10 @@ def create_app() -> Flask:
     return app
 
 
+# Create app instance for Gunicorn WSGI server (Gunicorn expects a WSGI callable (the Flask app), not the factory function)
+app = create_app()
+
+
 if __name__ == "__main__":
-    app = create_app()
-    app.run(host="0.0.0.0", port=3000, debug=config.DEBUG)
+    app.run(host="0.0.0.0", port=5150, debug=config.DEBUG)
 

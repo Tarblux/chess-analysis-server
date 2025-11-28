@@ -24,8 +24,6 @@ def _get_version_from_pyproject() -> str:
     
     return "0.1.0"
 
-
-# Try multiple possible locations for .env file
 env_paths = [
     Path(__file__).parent.parent / ".env",  # backend/.env
     Path.cwd() / ".env",  # Current working directory
