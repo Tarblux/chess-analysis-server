@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  app:
+  elombe:
     build:
       context: .
       dockerfile: Dockerfile
@@ -42,8 +42,8 @@ services:
       retries: 3
       start_period: 40s
     networks:
-      - app-network
+      - web
 
 networks:
-  app-network:
-    driver: bridge
+  web:
+    external: true
