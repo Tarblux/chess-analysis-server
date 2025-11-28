@@ -16,9 +16,6 @@ dist/
 instance/
 .webassets-cache
 
-# UV
-uv.lock
-
 # Celery stuff
 celerybeat-schedule
 celerybeat.pid
