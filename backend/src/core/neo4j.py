@@ -3,11 +3,13 @@ from flask import Flask
 from neo4j import GraphDatabase
 
 from src.config import config
+from src.utils.decorators import safe_init
 
 # Global Neo4j driver instance
 driver = None
 
 
+@safe_init(service_name="Neo4j")
 def init_neo4j(app: Flask) -> None:
     """
     Initialize Neo4j database connection

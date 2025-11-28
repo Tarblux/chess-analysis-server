@@ -23,23 +23,14 @@ def create_app() -> Flask:
     # Enable CORS
     CORS(app)
     
-    # Initialize database connections
-    try:
-        init_db(app)
-    except Exception as e:
-        app.logger.warning(f"Database initialization failed: {e}. App will continue without database.")
+    # Initialize database connections (safe_init decorator handles errors gracefully)
+    init_db(app)
     
-    # Initialize Neo4j
-    try:
-        init_neo4j(app)
-    except Exception as e:
-        app.logger.warning(f"Neo4j initialization failed: {e}. App will continue without Neo4j.")
+    # Initialize Neo4j (safe_init decorator handles errors gracefully)
+    init_neo4j(app)
     
-    # Initialize Celery 
-    try:
-        init_celery()
-    except Exception as e:
-        app.logger.warning(f"Celery initialization failed: {e}. App will continue without Celery.")
+    # Initialize Celery (safe_init decorator handles errors gracefully)
+    init_celery()
     
     # Register health check routes
     app.register_blueprint(health_bp)

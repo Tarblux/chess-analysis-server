@@ -6,6 +6,7 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy.ext.declarative import declarative_base
 
 from src.config import config
+from src.utils.decorators import safe_init
 
 # Create declarative base for models
 Base = declarative_base()
@@ -15,6 +16,7 @@ engine = None
 SessionLocal = None
 
 
+@safe_init(service_name="Database")
 def init_db(app: Flask) -> None:
     """
     Initialize database connection

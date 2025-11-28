@@ -3,11 +3,13 @@ from celery import Celery
 from kombu import Connection
 
 from src.config import config
+from src.utils.decorators import safe_init
 
 # Global Celery app instance
 celery_app = None
 
 
+@safe_init(service_name="Celery")
 def init_celery(app_name: str = "elombe") -> Celery:
     """
     Initialize Celery application with RabbitMQ broker.
