@@ -4,7 +4,7 @@ import time
 
 from src.config import config
 from src.core.database import init_db, close_db
-from src.core.neo4j import init_neo4j, close_neo4j
+from src.core.neo4j import init_neo4j
 from src.core.celery import init_celery
 from src.api.routes import health_bp
 
@@ -33,18 +33,13 @@ def create_app() -> Flask:
     
     @app.teardown_appcontext
     def teardown_db(error):
-        """Close database session on app teardown."""
+        """Close database session on app teardown and after request."""
         close_db()
-    
-    @app.teardown_appcontext
-    def teardown_neo4j(error):
-        """Close Neo4j connection on app teardown."""
-        close_neo4j()
     
     return app
 
 
-# Create app instance for Gunicorn WSGI server (Gunicorn expects a WSGI callable (the Flask app), not the factory function)
+# Create app instance for Gunicorn WSGI server (Gunicorn expects a WSGI callable (the Flask app), not the factory function like I had before)
 app = create_app()
 
 

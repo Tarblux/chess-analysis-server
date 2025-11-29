@@ -1,6 +1,5 @@
 """Celery application instance and RabbitMQ connection management."""
 from celery import Celery
-from kombu import Connection
 
 from src.config import config
 from src.utils.decorators import safe_init
@@ -41,23 +40,18 @@ def init_celery(app_name: str = "elombe") -> Celery:
 
 def check_rabbitmq_health() -> tuple[bool, str]:
     """
-    Check RabbitMQ connection health via broker connection.
+    Check RabbitMQ connection health via Celery's broker connection.
     
     Returns:
         Tuple of (is_healthy, message)
     """
-    try:
-        # Check if RabbitMQ config is available
-        broker_url = config.RABBITMQ_BROKER_URL
-    except ValueError as e:
-        return False, f"Configuration error: {str(e)}"
-    except Exception as e:
-        return False, f"Configuration error: {str(e)}"
+    if celery_app is None:
+        return False, "Celery app not initialized"
     
     try:
-        # Try to connect to RabbitMQ broker
-        conn = Connection(broker_url)
-        conn.connect()
+        # Use Celery's connection pool to check Brabbit Connection
+        conn = celery_app.connection()
+        conn.ensure_connection(max_retries=1)
         conn.release()
         return True, "Connection successful"
     except Exception as e:
